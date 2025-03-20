@@ -1,5 +1,3 @@
-// LANDING PAGE
-
 const page = () => {
   return <div></div>;
 };
