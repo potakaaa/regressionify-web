@@ -14,23 +14,38 @@ import { Button } from "@/components/ui/button";
 import SheetDropDown from "./SheetDropdown";
 import { Trash } from "lucide-react";
 import { useFile } from "@/store/file/useFile";
-
-const independent = ["X1", "X2", "X3"];
+import { useState } from "react";
 
 const IndependentCard = () => {
-  const { independents, setIndependents, columns } = useFile();
+  const { independents, setIndependents, columns, dependent } = useFile();
+  const [tempIndependents, setTempIndependents] = useState<string[]>([]);
 
   const handleAddIndependent = (independent: string) => {
-    if (!independents.includes(independent)) {
-      setIndependents([...independents, independent]);
+    if (!tempIndependents.includes(independent)) {
+      setTempIndependents([...tempIndependents, independent]);
     } else {
       console.log(`${independent} already exists in the list.`);
     }
   };
 
   const handleDeleteIndependent = (independent: string) => {
+    setTempIndependents(
+      tempIndependents.filter((item) => item !== independent)
+    );
     setIndependents(independents.filter((item) => item !== independent));
   };
+
+  const handleSaveIndependents = () => {
+    setIndependents(tempIndependents);
+  };
+
+  console.log("columns: ", columns);
+  console.log("dependent: ", dependent);
+  console.log("independents: ", independents);
+  console.log(
+    "filtered:",
+    columns.filter((column) => column !== dependent)
+  );
 
   return (
     <AlertDialog>
@@ -51,7 +66,7 @@ const IndependentCard = () => {
           <AlertDialogTitle>Select Independent Variables</AlertDialogTitle>
           <div className="flex flex-row justify-between">
             <div className="grid grid-cols-3 gap-3">
-              {independents.map((item, index) => (
+              {tempIndependents.map((item, index) => (
                 <div
                   key={index}
                   className="flex flex-row p-2 items-center justify-between border border-border rounded-lg w-24"
@@ -60,7 +75,7 @@ const IndependentCard = () => {
                     {item}
                   </p>
                   <button
-                    className="hover:bg-white hover:bg-opacity-10 p-1 rounded-lg"
+                    className="hover:bg-foreground/5 p-1 rounded-lg cursor-pointer"
                     onClick={() => handleDeleteIndependent(item)}
                   >
                     <Trash size={15} className="text-red-500" />
@@ -68,12 +83,20 @@ const IndependentCard = () => {
                 </div>
               ))}
             </div>
-            <SheetDropDown propList={columns} onClick={handleAddIndependent} />
+            <SheetDropDown
+              propList={columns.filter((column) => column !== dependent)}
+              onClick={handleAddIndependent}
+            />
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Save</AlertDialogAction>
+          <AlertDialogAction
+            className="cursor-pointer"
+            onClick={handleSaveIndependents}
+          >
+            Save
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

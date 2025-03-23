@@ -14,6 +14,9 @@ import { useFile } from "@/store/file/useFile";
 import { useMutationUploadSheet } from "@/hooks/tanstack/upload-sheet/useMutationUploadSheet";
 import { toast } from "sonner";
 import { useMutationSheetname } from "@/hooks/tanstack/select-sheetname/useMutationSheetname";
+import { Button } from "../ui/button";
+import { useMutationColumn } from "@/hooks/tanstack/select-column/useMutationColumn";
+import { useResults } from "@/store/results/useResults";
 
 const dependentSample = ["Y1", "Y2", "Y3"];
 
@@ -25,11 +28,16 @@ const CreateForm = () => {
     setFileName,
     columns,
     dependent,
+    setDependent,
     independents,
+    setIndependents,
+    setColumns,
     sheetName,
     setSheetName,
     sheetNames,
   } = useFile();
+
+  const { results } = useResults();
 
   const {
     mutate: uploadFile,
@@ -42,6 +50,12 @@ const CreateForm = () => {
     isPending: sheetSelectPending,
     isError: sheetSelectError,
   } = useMutationSheetname();
+
+  const {
+    mutate: submit,
+    isPending: submitPending,
+    isError: submitError,
+  } = useMutationColumn();
 
   const handleUploadFile = async (e: any) => {
     if (e.target.files && e.target.files[0]) {
@@ -65,6 +79,8 @@ const CreateForm = () => {
       success: "File uploaded successfully!",
       error: "An error occurred while uploading the file.",
     });
+
+    return uploadPromise;
   };
 
   // useEffect(() => {
@@ -90,7 +106,32 @@ const CreateForm = () => {
       success: "Columns retrieved successfully!",
       error: "An error occurred while retrieving columns.",
     });
+
+    return selectSheetPromise;
   };
+
+  const handleSelectDependent = (dependent: string) => {
+    if (dependent) {
+      setDependent(dependent);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (independents.length < 1 || dependent.length < 1 || sheetName === "") {
+      toast.error("Missing required fields");
+      return;
+    }
+    submit({
+      independent: independents,
+      dependent: dependent,
+      sheetName: sheetName,
+      file_path: filePath,
+    });
+  };
+
+  useEffect(() => {
+    console.log("RESULTS: ", results);
+  }, [results]);
 
   return (
     <motion.section
@@ -128,7 +169,10 @@ const CreateForm = () => {
                   className="w-full flex flex-row justify-between items-center"
                 >
                   <p className="text-sm w-32 font-medium">Dependent Variable</p>
-                  <SheetDropDown propList={columns} />
+                  <SheetDropDown
+                    propList={columns}
+                    onClick={handleSelectDependent}
+                  />
                 </motion.div>
                 <motion.div
                   variants={formElementMotion}
@@ -159,6 +203,13 @@ const CreateForm = () => {
           className="text-sm duration-300 cursor-pointer hover:bg-muted"
         />
       </motion.div>
+      <Button
+        className="w-full cursor-pointer"
+        disabled={dependent.length < 1 && independents.length < 1}
+        onClick={handleSubmit}
+      >
+        Submit
+      </Button>
     </motion.section>
   );
 };

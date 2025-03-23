@@ -1,4 +1,5 @@
 import clientInstance from "@/utils/clientInstance";
+import { toast } from "sonner";
 
 export const postSelectColumn = async (
   independent: string[],
@@ -7,16 +8,21 @@ export const postSelectColumn = async (
   file_path: string
 ) => {
   const payload = {
-    independent: independent,
-    dependent: dependent,
-    sheetName: sheetName,
+    independent_columns: independent,
+    dependent_column: dependent,
+    sheetname: sheetName,
     file_path: file_path,
   };
   try {
-    const res = await clientInstance.post("select-column", payload);
+    const res = await clientInstance.post("select_columns/", payload);
     return res.data;
-  } catch (e) {
+  } catch (e: any) {
+    const error = e.response?.data || e.message;
     console.error("Error selecting columns", e);
+    console.error("Error in postSheetName", error);
+    if (error) {
+      toast.error("An error occured. Please try again.");
+    }
     throw new Error("Error selecting columns");
   }
 };
