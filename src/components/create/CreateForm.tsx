@@ -129,9 +129,9 @@ const CreateForm = () => {
     });
   };
 
-  useEffect(() => {
-    console.log("RESULTS: ", results);
-  }, [results]);
+  // useEffect(() => {
+  //   console.log("RESULTS: ", results);
+  // }, [results]);
 
   return (
     <motion.section
