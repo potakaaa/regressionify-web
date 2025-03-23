@@ -36,7 +36,7 @@ const SheetDropDown: FC<DropDownProps> = (DropDownProps) => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-32 justify-between"
+          className="w-32 justify-between cursor-pointer overflow-hidden text-ellipsis"
         >
           {value}
           <ChevronsUpDown className="opacity-50" />
@@ -55,6 +55,8 @@ const SheetDropDown: FC<DropDownProps> = (DropDownProps) => {
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? value : currentValue);
                     setOpen(false);
+
+                    // Pass the value directly instead of wrapping it in an object
                     DropDownProps.onClick?.(currentValue);
                   }}
                 >
