@@ -1,4 +1,5 @@
 import clientInstance from "@/utils/clientInstance";
+import { toast } from "sonner";
 
 export const postUploadSheet = async (file: File) => {
   const formData = new FormData();
@@ -12,6 +13,7 @@ export const postUploadSheet = async (file: File) => {
     return res.data;
   } catch (e) {
     console.error("Error uploading file", e);
+
     throw new Error("Error uploading file");
   }
 };

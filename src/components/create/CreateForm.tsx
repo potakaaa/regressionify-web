@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import SheetDropDown from "./SheetDropdown";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   formElementMotion,
   formMotion,
@@ -38,9 +38,10 @@ const CreateForm = () => {
   } = useFile();
 
   const { results } = useResults();
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
-    mutate: uploadFile,
+    mutateAsync: uploadFile,
     isPending: uploadPending,
     isError: uploadError,
   } = useMutationUploadSheet();
@@ -52,35 +53,42 @@ const CreateForm = () => {
   } = useMutationSheetname();
 
   const {
-    mutate: submit,
+    mutateAsync: submit,
     isPending: submitPending,
     isError: submitError,
   } = useMutationColumn();
 
   const handleUploadFile = async (e: any) => {
-    if (e.target.files && e.target.files[0]) {
-      const fileURL = URL.createObjectURL(e.target.files[0]);
-      setFileName(e.target.files[0].name);
+    if (!e.target.files || !e.target.files[0]) {
+      toast.error("No file selected");
+      return;
     }
 
-    const uploadPromise = new Promise<void>(async (resolve, reject) => {
-      try {
-        await uploadFile(e.target.files[0]);
+    setFileName(e.target.files[0].name);
 
-        resolve();
-      } catch (error) {
-        setFileName("");
-        reject(error);
+    // const uploadPromise = new Promise<void>((resolve, reject) => {
+    //   try {
+
+    //     resolve();
+    //   } catch (error) {
+    //     setFileName("");
+    //     reject(error);
+    //   }
+    // });
+
+    try {
+      await toast.promise(uploadFile(e.target.files[0]), {
+        loading: "Uploading file...",
+        success: "File uploaded successfully!",
+        error: "An error occurred while uploading the file.",
+      });
+    } catch (error) {
+      console.error("Error uploading file", error);
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
       }
-    });
-
-    toast.promise(uploadPromise, {
-      loading: "Uploading file...",
-      success: "File uploaded successfully!",
-      error: "An error occurred while uploading the file.",
-    });
-
-    return uploadPromise;
+    }
   };
 
   // useEffect(() => {
@@ -129,9 +137,9 @@ const CreateForm = () => {
     });
   };
 
-  // useEffect(() => {
-  //   console.log("RESULTS: ", results);
-  // }, [results]);
+  useEffect(() => {
+    console.log("RESULTS: ", results);
+  }, [results]);
 
   return (
     <motion.section
@@ -142,7 +150,7 @@ const CreateForm = () => {
       animate="show"
     >
       <AnimatePresence>
-        {fileName === "" || (
+        {filePath.length > 1 && (
           <>
             <motion.h1
               variants={formElementMotion}
@@ -196,9 +204,14 @@ const CreateForm = () => {
       >
         <Label className="text-sm font-medium ml-1">Upload Excel File</Label>
         <Input
+          ref={fileInputRef}
           type="file"
           multiple={false}
           onChange={handleUploadFile}
+          disabled={uploadPending || submitPending || sheetSelectPending}
+          onError={() =>
+            toast.error("An error occurred while uploading the file.")
+          }
           accept=".xlsx, .xls"
           className="text-sm duration-300 cursor-pointer hover:bg-muted"
         />

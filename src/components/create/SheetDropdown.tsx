@@ -18,16 +18,29 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 export interface DropDownProps {
   propList: string[];
   onClick?: (selectedValue: string) => void;
 }
 
-const SheetDropDown: FC<DropDownProps> = (DropDownProps) => {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(DropDownProps.propList[0]);
+const SheetDropDown: FC<DropDownProps> = ({
+  propList,
+  onClick,
+}: {
+  propList: string[];
+  onClick?: (selectedValue: string) => void;
+}) => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(propList[0]);
+
+  // Update value when propList changes
+  useEffect(() => {
+    if (propList.length > 0) {
+      setValue(propList[0]);
+    }
+  }, [propList]);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -48,7 +61,7 @@ const SheetDropDown: FC<DropDownProps> = (DropDownProps) => {
           <CommandList>
             <CommandEmpty>No sheet found.</CommandEmpty>
             <CommandGroup>
-              {DropDownProps.propList.map((sheet) => (
+              {propList.map((sheet) => (
                 <CommandItem
                   key={sheet}
                   value={sheet}
@@ -57,7 +70,7 @@ const SheetDropDown: FC<DropDownProps> = (DropDownProps) => {
                     setOpen(false);
 
                     // Pass the value directly instead of wrapping it in an object
-                    DropDownProps.onClick?.(currentValue);
+                    onClick?.(currentValue);
                   }}
                 >
                   {sheet}
