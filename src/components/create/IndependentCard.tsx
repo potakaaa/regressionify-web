@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import SheetDropDown from "./SheetDropdown";
 import { Trash } from "lucide-react";
 import { useFile } from "@/store/file/useFile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const IndependentCard = () => {
   const { independents, setIndependents, columns, dependent } = useFile();
@@ -46,6 +46,11 @@ const IndependentCard = () => {
     "filtered:",
     columns.filter((column) => column !== dependent)
   );
+
+  useEffect(() => {
+    setIndependents([]);
+    setTempIndependents([]);
+  }, [dependent]);
 
   return (
     <AlertDialog>
