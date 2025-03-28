@@ -17,6 +17,7 @@ import { useMutationSheetname } from "@/hooks/tanstack/select-sheetname/useMutat
 import { Button } from "../ui/button";
 import { useMutationColumn } from "@/hooks/tanstack/select-column/useMutationColumn";
 import { useResults } from "@/store/results/useResults";
+import { FileUpload } from "../ui/file-upload";
 
 const dependentSample = ["Y1", "Y2", "Y3"];
 
@@ -202,7 +203,7 @@ const CreateForm = () => {
         id="file-upload-container"
         className="w-full pt-7 space-y-1"
       >
-        <Label className="text-sm font-medium ml-1">Upload Excel File</Label>
+        {/* <Label className="text-sm font-medium ml-1">UPLOAD FILE</Label>
         <Input
           ref={fileInputRef}
           type="file"
@@ -214,6 +215,10 @@ const CreateForm = () => {
           }
           accept=".xlsx, .xls"
           className="text-sm duration-300 cursor-pointer hover:bg-muted"
+        /> */}
+        <FileUpload
+          onChange={handleUploadFile}
+          disabled={uploadPending || submitPending || sheetSelectPending}
         />
       </motion.div>
       <Button
