@@ -144,7 +144,7 @@ const CreateForm = () => {
   return (
     <motion.section
       id="form-container"
-      className="space-y-3 w-72 flex flex-col justify-center"
+      className="space-y-3 w-full flex flex-col justify-center"
       variants={formMotion}
       initial="hidden"
       animate="show"
