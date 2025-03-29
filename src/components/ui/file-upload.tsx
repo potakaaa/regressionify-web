@@ -30,19 +30,24 @@ export const FileUpload = ({
   onChange,
   disabled,
 }: {
-  onChange?: (files: File[]) => void;
+  onChange?: (e: any) => void;
   disabled?: boolean;
 }) => {
   const [files, setFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (newFiles: File[]) => {
-    setFiles((prevFiles) => [...prevFiles, ...newFiles]);
-    onChange && onChange(newFiles);
-  };
+  // const handleFileChange = (newFiles: File[]) => {
+  //   setFiles((prevFiles) => [...prevFiles, ...newFiles]);
+  //   onChange && onChange(newFiles);
+  // };
 
   const handleClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: any) => {
+    setFiles((prevFiles) => [...prevFiles, ...e.target.files]);
+    onChange && onChange(e);
   };
 
   const { getRootProps, isDragActive } = useDropzone({
@@ -66,8 +71,9 @@ export const FileUpload = ({
           id="file-upload-handle"
           type="file"
           disabled={disabled}
-          onChange={(e) => handleFileChange(Array.from(e.target.files || []))}
+          onChange={handleFileChange}
           className="hidden"
+          multiple={false}
           onError={() =>
             toast.error("An error occurred while uploading the file.")
           }

@@ -19,18 +19,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { FC, useEffect, useState } from "react";
+import GradientBorderContainer from "../GradientBorderContainer";
 
 export interface DropDownProps {
   propList: string[];
   onClick?: (selectedValue: string) => void;
+  customWidth?: string;
 }
 
 const SheetDropDown: FC<DropDownProps> = ({
   propList,
   onClick,
+  customWidth,
 }: {
   propList: string[];
   onClick?: (selectedValue: string) => void;
+  customWidth?: string;
 }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(propList[0]);
@@ -44,20 +48,29 @@ const SheetDropDown: FC<DropDownProps> = ({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="w-32 justify-between cursor-pointer overflow-hidden text-ellipsis"
-        >
-          {value}
-          <ChevronsUpDown className="opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-40 p-0">
-        <Command>
-          <CommandInput placeholder="Search sheet" />
+      <GradientBorderContainer
+        padding="p-[3px]"
+        className="pointer-events-auto"
+      >
+        <PopoverTrigger asChild>
+          <Button
+            variant={"ghost"}
+            role="combobox"
+            aria-expanded={open}
+            className={`w-80 py-5 justify-between cursor-pointer overflow-hidden text-ellipsis bg-white text-base rounded-xl hover:bg-gray-100 shadow-md ${customWidth}`}
+          >
+            {value}
+            <ChevronsUpDown className="opacity-50" />
+          </Button>
+        </PopoverTrigger>
+      </GradientBorderContainer>
+      <PopoverContent className={`w-80 p-0 bg-white ${customWidth}`}>
+        <Command className="bg-white">
+          <CommandInput
+            placeholder="Search sheet"
+            autoFocus={false}
+            tabIndex={-1}
+          />
           <CommandList>
             <CommandEmpty>No sheet found.</CommandEmpty>
             <CommandGroup>
@@ -65,6 +78,7 @@ const SheetDropDown: FC<DropDownProps> = ({
                 <CommandItem
                   key={sheet}
                   value={sheet}
+                  className="cursor-pointer font-medium"
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? value : currentValue);
                     setOpen(false);

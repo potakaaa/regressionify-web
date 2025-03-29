@@ -8,16 +8,16 @@ const page = () => {
   return (
     <div
       id="parent-container"
-      className="w-full min-h-screen bg-gradient-to-t from-[#FFEDD5] to-[#DBEAFE] p-16 px-32 items-center justify-center"
+      className="w-full min-h-screen bg-gradient-to-t from-[#FFEDD5] to-[#DBEAFE] p-16 px-32 items-center justify-center self-center overflow-hidden"
     >
       <GradientBorderContainer
         id="gradient-border"
-        className="w-full min-h-11/12 shadow-lg"
+        className="w-full h-full shadow-lg"
         padding="p-[5px]"
       >
         <div
           id="grid-container"
-          className="bg-white rounded-2xl w-full h-[800px] grid grid-cols-2 gap-4"
+          className="bg-white rounded-2xl w-full h-[750px] grid grid-cols-2 gap-4"
         >
           <section
             id="left-section"
@@ -45,11 +45,8 @@ const page = () => {
           </section>
           <section
             id="right-section"
-            className="flex flex-col items-center justify-center w-full p-5 px-10"
+            className="flex flex-col items-center justify-center w-full py-5 px-16"
           >
-            <h2 className="text-left items-start font-medium">
-              Worksheet Details
-            </h2>
             <CreateForm />
           </section>
         </div>

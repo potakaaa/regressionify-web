@@ -15,6 +15,7 @@ import SheetDropDown from "./SheetDropdown";
 import { Trash } from "lucide-react";
 import { useFile } from "@/store/file/useFile";
 import { useEffect, useState } from "react";
+import GradientBorderContainer from "../GradientBorderContainer";
 
 const IndependentCard = () => {
   const { independents, setIndependents, columns, dependent } = useFile();
@@ -54,21 +55,28 @@ const IndependentCard = () => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button
-          variant="outline"
-          className="w-32 overflow-hidden text-ellipsis inline-block cursor-pointer"
-        >
-          {independents.length > 0
-            ? independents.map((item, index) =>
-                index === independents.length - 1 ? item : item + ", "
-              )
-            : "Select Independent"}
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
+      <GradientBorderContainer
+        padding="p-[3px]"
+        className="pointer-events-auto"
+      >
+        <AlertDialogTrigger asChild>
+          <Button
+            variant="ghost"
+            className="w-80 py-5 rounded-xl bg-white text-base overflow-hidden text-ellipsis cursor-pointer shadow-md"
+          >
+            {independents.length > 0
+              ? independents.map((item, index) =>
+                  index === independents.length - 1 ? item : item + ", "
+                )
+              : "Select Independent"}
+          </Button>
+        </AlertDialogTrigger>
+      </GradientBorderContainer>
+      <AlertDialogContent className="w-[500px] h-[200px] flex flex-col justify-between">
         <AlertDialogHeader>
-          <AlertDialogTitle>Select Independent Variables</AlertDialogTitle>
+          <AlertDialogTitle className="mb-5">
+            Select Independent Variables
+          </AlertDialogTitle>
           <div className="flex flex-row justify-between">
             <div className="grid grid-cols-3 gap-3">
               {tempIndependents.map((item, index) => (
@@ -91,13 +99,14 @@ const IndependentCard = () => {
             <SheetDropDown
               propList={columns.filter((column) => column !== dependent)}
               onClick={handleAddIndependent}
+              customWidth="w-[150px]"
             />
           </div>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel className="rounded-xl">Cancel</AlertDialogCancel>
           <AlertDialogAction
-            className="cursor-pointer"
+            className="cursor-pointer rounded-xl bg-gradient-to-tr  from-[#EF4444] to-[#FDE68A] text-white text-sm font-medium shadow-lg hover:bg-gradient-to-tr hover:from-[#EF4444]/80 hover:to-[#FDE68A]/80 duration-200 transition-all"
             onClick={handleSaveIndependents}
           >
             Save

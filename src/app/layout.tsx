@@ -3,6 +3,12 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Toaster } from "sonner";
+import "@mantine/core/styles.css";
+import {
+  ColorSchemeScript,
+  MantineProvider,
+  mantineHtmlProps,
+} from "@mantine/core";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,12 +32,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" {...mantineHtmlProps}>
       <body
         className={`${poppins.variable} antialiased w-full min-h-screen flex justify-center items-center`}
       >
-        <Providers>{children}</Providers>
-        <Toaster richColors expand={false} position="top-center" />
+        <Providers>
+          <MantineProvider>
+            {children}
+            <Toaster richColors expand={false} position="top-center" />
+          </MantineProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -18,6 +18,9 @@ import { Button } from "../ui/button";
 import { useMutationColumn } from "@/hooks/tanstack/select-column/useMutationColumn";
 import { useResults } from "@/store/results/useResults";
 import { FileUpload } from "../ui/file-upload";
+import { MultiSelect } from "primereact/multiselect";
+import IndependentSelect from "./IndependentSelect";
+import GradientBorderContainer from "../GradientBorderContainer";
 
 const dependentSample = ["Y1", "Y2", "Y3"];
 
@@ -145,7 +148,7 @@ const CreateForm = () => {
   return (
     <motion.section
       id="form-container"
-      className="space-y-3 w-full flex flex-col justify-center"
+      className="space-y-3 w-full flex flex-col justify-between items-center"
       variants={formMotion}
       initial="hidden"
       animate="show"
@@ -155,16 +158,19 @@ const CreateForm = () => {
           <>
             <motion.h1
               variants={formElementMotion}
-              className="font-extrabold text-xl text-primary"
+              className="text-left items-start font-bold self-start text-xl mb-5"
             >
-              Worksheet Details
+              WORKSHEET DETAILS
             </motion.h1>
+
             <motion.div
               id="sheet-name-container"
               className="w-full flex flex-row justify-between items-center"
               variants={formElementMotion}
             >
-              <p className="text-sm w-32 font-medium">Reference Sheet Name</p>
+              <p className="text-lg text-black font-medium">
+                Reference Sheet Name
+              </p>
               <SheetDropDown
                 propList={sheetNames}
                 onClick={handleSelectSheet}
@@ -177,7 +183,9 @@ const CreateForm = () => {
                   id="dependent-var-container"
                   className="w-full flex flex-row justify-between items-center"
                 >
-                  <p className="text-sm w-32 font-medium">Dependent Variable</p>
+                  <p className="text-lg text-black font-medium">
+                    Dependent Variable
+                  </p>
                   <SheetDropDown
                     propList={columns}
                     onClick={handleSelectDependent}
@@ -188,10 +196,13 @@ const CreateForm = () => {
                   id="independent-var-container"
                   className="w-full flex flex-row justify-between items-center"
                 >
-                  <p className="text-sm w-32 font-medium">
+                  <p className="text-lg text-black font-medium">
                     Independent Variable
                   </p>
-                  <IndependentCard />
+                  <GradientBorderContainer padding="p-[3px]" className="">
+                    <IndependentSelect />
+                  </GradientBorderContainer>
+                  {/* <IndependentCard /> */}
                 </motion.div>
               </>
             )}
@@ -222,11 +233,11 @@ const CreateForm = () => {
         />
       </motion.div>
       <Button
-        className="w-full cursor-pointer"
+        className="w-full cursor-pointer py-6 rounded-xl bg-gradient-to-tr  from-[#EF4444] to-[#FDE68A] text-white text-base font-bold shadow-lg"
         disabled={dependent.length < 1 && independents.length < 1}
         onClick={handleSubmit}
       >
-        Submit
+        START REGRESSION
       </Button>
     </motion.section>
   );
