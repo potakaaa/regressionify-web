@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { MultiSelect } from "@mantine/core";
 
 const IndependentSelect = () => {
-  const { independents, setIndependents, columns, dependent } = useFile();
+  const { independents, setIndependents, columns, dependent, setStep } =
+    useFile();
   const [selectedIndependents, setSelectedIndependents] = useState<string[]>(
     []
   );
@@ -11,12 +12,19 @@ const IndependentSelect = () => {
   const handleSelectIndependents = (value: string[]) => {
     setSelectedIndependents(value);
     setIndependents(value);
+    setStep(4);
   };
 
   useEffect(() => {
     setSelectedIndependents([]);
     setIndependents([]);
   }, [dependent]);
+
+  useEffect(() => {
+    if (independents.length === 0) {
+      setStep(3);
+    }
+  }, [independents]);
 
   return (
     <MultiSelect

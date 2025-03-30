@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" {...mantineHtmlProps}>
       <body
-        className={`${poppins.variable} antialiased w-full min-h-screen flex justify-center items-center`}
+        className={`antialiased w-full min-h-screen flex justify-center items-center`}
       >
         <Providers>
           <MantineProvider>

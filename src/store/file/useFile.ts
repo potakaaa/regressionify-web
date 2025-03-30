@@ -16,6 +16,9 @@ type SheetFile = {
   setIndependents: (independent: string[]) => void;
   dependent: string;
   setDependent: (dependent: string) => void;
+
+  step: number;
+  setStep: (step: number) => void;
 };
 
 export const useFile = create<SheetFile>((set) => ({
@@ -39,4 +42,7 @@ export const useFile = create<SheetFile>((set) => ({
 
   dependent: "",
   setDependent: (dependent) => set({ dependent }),
+
+  step: 0,
+  setStep: (step) => set({ step }),
 }));
