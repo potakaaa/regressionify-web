@@ -8,8 +8,10 @@ const ProgressBar = () => {
   return (
     <div className="flex justify-between w-full relative">
       <div className="flex flex-col gap-2 items-center justify-center relative z-10">
-        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-12" />
-        <p className="text-sm font-medium">Upload File</p>
+        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 lg:size-12" />
+        <p className="text-xs sm:text-sm font-medium text-center">
+          Upload File
+        </p>
         {step >= 1 && (
           <motion.div
             className="absolute top-3 drop-shadow-lg"
@@ -22,8 +24,10 @@ const ProgressBar = () => {
         )}
       </div>
       <div className="flex flex-col gap-2 items-center justify-center z-10">
-        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-12" />
-        <p className="text-sm font-medium">Select Sheet</p>
+        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 lg:size-12" />
+        <p className="text-xs sm:text-sm font-medium text-center">
+          Select Sheet
+        </p>
         {step >= 2 && (
           <motion.div
             className="absolute top-3 drop-shadow-lg"
@@ -36,8 +40,10 @@ const ProgressBar = () => {
         )}
       </div>
       <div className="flex flex-col gap-2 items-center justify-center z-10">
-        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-12" />
-        <p className="text-sm font-medium">Select Columns</p>
+        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 lg:size-12" />
+        <p className="text-xs sm:text-sm font-medium text-center">
+          Select Columns
+        </p>
         <AnimatePresence>
           {step >= 4 && (
             <motion.div
@@ -52,7 +58,8 @@ const ProgressBar = () => {
           )}
         </AnimatePresence>
       </div>
-      <span className="absolute top-5 left-5 w-[90%] h-2 bg-primary/70 shadow-md rounded-full" />
+      {/* <span className="absolute top-4 lg:top-5 left-6 lg:left-5 w-[70%] lg:w-[90%] h-2 bg-primary/70 shadow-md rounded-full" /> */}
+      <span className="absolute top-4 lg:top-5 left-12 right-12 h-2 bg-primary/70 shadow-md rounded-full" />
     </div>
   );
 };

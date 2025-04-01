@@ -6,57 +6,40 @@ import Image from "next/image";
 
 const page = () => {
   return (
-    <div
-      id="parent-container"
-      className="w-full min-h-screen border border-red-400 p-5 bg-white overflow-hidden shadow-lg flex items-center justify-center"
-    >
-      <div
-        id="child-container"
-        className="w-full h-full bg-gradient-to-t from-[#FFEDD5] to-[#DBEAFE] p-16 px-40 flex items-center justify-center self-center overflow-hidden rounded-2xl shadow-sm"
+    <>
+      <section
+        id="left-section"
+        className="flex flex-col items-start justify-between relative p-3 px-2 lg:p-5 lg:px-10 gap-5"
       >
-        <GradientBorderContainer
-          id="gradient-border"
-          className="w-full shadow-lg h-[750px]"
-          padding="p-[5px]"
-        >
-          <div
-            id="grid-container"
-            className="bg-white rounded-2xl w-full h-full grid grid-cols-2 gap-4"
-          >
-            <section
-              id="left-section"
-              className="flex flex-col items-start justify-between relative p-5 px-10 gap-5"
-            >
-              <div>
-                <BackButton />
-              </div>
-              <div id="logo-container" className="ml-7">
-                <Image
-                  src="/regressionify-500px.png"
-                  alt="Logo"
-                  className="drop-shadow-lg"
-                  width={100}
-                  height={100}
-                />
-                <header className="flex flex-col gap-3">
-                  <h1 className="text-5xl font-semibold mt-5">Regressionify</h1>
-                  <p className="font- w-72 line-clamp-2">
-                    A Statistical Tool For Students and Statisticians
-                  </p>
-                </header>
-              </div>
-              <InfoSection />
-            </section>
-            <section
-              id="right-section"
-              className="flex flex-col items-center justify-center w-full py-5 px-16"
-            >
-              <CreateForm />
-            </section>
-          </div>
-        </GradientBorderContainer>
-      </div>
-    </div>
+        <div>
+          <BackButton />
+        </div>
+        <div id="logo-container" className="ml-3 lg:ml-7">
+          <Image
+            src="/regressionify-500px.png"
+            alt="Logo"
+            className="drop-shadow-lg size-[80px] lg:size-[100px]"
+            width={100}
+            height={100}
+          />
+          <header className="flex flex-col gap-1 lg:gap-3">
+            <h1 className="text-3xl lg:text-5xl font-semibold mt-5">
+              Regressionify
+            </h1>
+            <p className="w-72 line-clamp-2 text-sm lg:text-base">
+              A Statistical Tool For Students and Statisticians
+            </p>
+          </header>
+        </div>
+        <InfoSection />
+      </section>
+      <section
+        id="right-section"
+        className="flex flex-col items-center justify-center w-full py-2 px-5 pb-5 lg:py-5 lg:px-16"
+      >
+        <CreateForm />
+      </section>
+    </>
   );
 };
 

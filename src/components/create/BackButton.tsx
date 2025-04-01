@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 const BackButton = () => {
   return (
     <Button variant="ghost" className="cursor-pointer hover:bg-neutral-100">
-      <ArrowLeft className="size-6" />
+      <ArrowLeft className="size-5 lg:size-6" />
     </Button>
   );
 };
