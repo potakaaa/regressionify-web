@@ -57,14 +57,16 @@ const SheetDropDown: FC<DropDownProps> = ({
             variant={"ghost"}
             role="combobox"
             aria-expanded={open}
-            className={`w-80 py-5 justify-between cursor-pointer overflow-hidden text-ellipsis bg-white text-base rounded-xl hover:bg-gray-100 shadow-md ${customWidth}`}
+            className={`w-40 sm:w-72 md:w-80 lg:w-60 xl:w-72 2xl:w-80 py-2 lg:py-5 justify-between cursor-pointer overflow-hidden text-ellipsis bg-white text-sm lg:text-base rounded-xl hover:bg-gray-100 shadow-md ${customWidth}`}
           >
             {value}
             <ChevronsUpDown className="opacity-50" />
           </Button>
         </PopoverTrigger>
       </GradientBorderContainer>
-      <PopoverContent className={`w-80 p-0 bg-white ${customWidth}`}>
+      <PopoverContent
+        className={`w-40 sm:w-72 md:w-80 lg:w-60 xl:w-72 2xl:w-80 p-0 bg-white ${customWidth}`}
+      >
         <Command className="bg-white">
           <CommandInput
             placeholder="Search sheet"

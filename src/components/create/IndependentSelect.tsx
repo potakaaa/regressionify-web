@@ -33,22 +33,11 @@ const IndependentSelect = () => {
       onChange={handleSelectIndependents}
       placeholder={selectedIndependents.length > 0 ? "" : "Select Independents"}
       clearable
-      className="rounded-xl w-80 text-base line-clamp-1"
-      styles={{
-        input: {
-          borderRadius: "12px",
-          fontSize: "1rem",
-          paddingTop: "0.52rem",
-          paddingBottom: "0.52rem",
-        },
-        pill: {
-          fontSize: "0.875rem",
-          fontWeight: "500",
-        },
-        option: {
-          fontSize: "0.875rem",
-          fontWeight: "500",
-        },
+      className="rounded-xl w-40 sm:w-72 md:w-80 lg:w-60 xl:w-72 2xl:w-80 text-sm lg:text-base line-clamp-1 transition-all duration-200"
+      classNames={{
+        input: "text-sm md:text-base lg:text-base rounded-xl py-2",
+        pill: "text-sm md:text-base lg:text-base font-medium",
+        option: "text-sm md:text-base lg:text-base font-medium",
       }}
       hidePickedOptions
     />

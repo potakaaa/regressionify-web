@@ -9,7 +9,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     >
       <div
         id="child-container"
-        className="w-full h-full bg-gradient-to-t from-[#FFEDD5] to-[#DBEAFE] p-5 lg:p-16 px-2 lg:px-40 flex items-center justify-center self-center overflow-hidden rounded-2xl shadow-sm"
+        className="w-full h-full bg-gradient-to-t from-[#FFEDD5] to-[#DBEAFE] p-5 lg:p-5 xl:p-16 2xl:p-20 px-2 lg:px-5 xl:px-16 2xl:px-40 flex items-center justify-center self-center overflow-hidden rounded-2xl shadow-sm"
       >
         <GradientBorderContainer
           id="gradient-border"

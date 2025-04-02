@@ -162,7 +162,7 @@ const CreateForm = () => {
       <AnimatePresence>
         {filePath.length > 1 && (
           <motion.div
-            className="w-full flex flex-col gap-5"
+            className="w-full flex flex-col gap-5 pt-2 lg:pt-0"
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
@@ -173,7 +173,7 @@ const CreateForm = () => {
               delayChildren: 0.25,
             }}
           >
-            <motion.h1 className="text-left items-start font-bold self-start text-xl mb-2">
+            <motion.h1 className="text-left items-start font-bold self-start text-base sm:text-lg lg:text-base xl:text-xl mb-0 sm:mt-2 md:mt-5 lg:mb-2 lg:mt-0">
               WORKSHEET DETAILS
             </motion.h1>
 
@@ -181,7 +181,7 @@ const CreateForm = () => {
               id="sheet-name-container"
               className="w-full flex flex-row justify-between items-center"
             >
-              <p className="text-lg text-black font-medium">
+              <p className="text-sm sm:text-base xl:text-lg text-black font-medium">
                 Reference Sheet Name
               </p>
               <SheetDropDown
@@ -203,7 +203,7 @@ const CreateForm = () => {
                       ease: "easeInOut",
                     }}
                   >
-                    <p className="text-lg text-black font-medium">
+                    <p className="text-sm sm:text-base xl:text-lg text-black font-medium">
                       Dependent Variable
                     </p>
                     <SheetDropDown
@@ -222,7 +222,7 @@ const CreateForm = () => {
                       ease: "easeInOut",
                     }}
                   >
-                    <p className="text-lg text-black font-medium">
+                    <p className="text-sm sm:text-base xl:text-lg text-black font-medium">
                       Independent Variable
                     </p>
                     <GradientBorderContainer padding="p-[3px]" className="">

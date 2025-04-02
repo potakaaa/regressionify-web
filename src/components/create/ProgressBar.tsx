@@ -8,7 +8,7 @@ const ProgressBar = () => {
   return (
     <div className="flex justify-between w-full relative">
       <div className="flex flex-col gap-2 items-center justify-center relative z-10">
-        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 lg:size-12" />
+        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 md:size-11 lg:size-12" />
         <p className="text-xs sm:text-sm font-medium text-center">
           Upload File
         </p>
@@ -19,12 +19,12 @@ const ProgressBar = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <Check className="size-6 text-white" />
+            <Check className="size-4 md:size-5 lg:size-6 text-white" />
           </motion.div>
         )}
       </div>
       <div className="flex flex-col gap-2 items-center justify-center z-10">
-        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 lg:size-12" />
+        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 md:size-11 lg:size-12" />
         <p className="text-xs sm:text-sm font-medium text-center">
           Select Sheet
         </p>
@@ -35,12 +35,12 @@ const ProgressBar = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            <Check className="size-6 text-white" />
+            <Check className="size-4 md:size-5 lg:size-6 text-white" />
           </motion.div>
         )}
       </div>
       <div className="flex flex-col gap-2 items-center justify-center z-10">
-        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 lg:size-12" />
+        <span className="bg-gradient-to-tr from-[#D7426E] to-[#EDE7BD] rounded-full size-9 md:size-11 lg:size-12" />
         <p className="text-xs sm:text-sm font-medium text-center">
           Select Columns
         </p>
@@ -53,7 +53,7 @@ const ProgressBar = () => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               exit={{ y: 10, opacity: 0 }}
             >
-              <Check className="size-6 text-white" />
+              <Check className="size-4 md:size-5 lg:size-6 text-white" />
             </motion.div>
           )}
         </AnimatePresence>
