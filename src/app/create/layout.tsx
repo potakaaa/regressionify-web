@@ -5,7 +5,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
       id="parent-container"
-      className="w-full min-h-screen border border-red-400 p-2 lg:p-5 bg-white overflow-hidden shadow-lg flex items-center justify-center"
+      className="w-full min-h-screen p-2 lg:p-5 bg-white overflow-hidden shadow-lg flex items-center justify-center"
     >
       <div
         id="child-container"
@@ -16,12 +16,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           className="w-full shadow-lg h-full lg:h-[750px]"
           padding="p-[3px] lg:p-[5px]"
         >
-          <div
-            id="grid-container"
-            className="bg-white rounded-2xl w-full h-full flex flex-col lg:grid lg:grid-cols-2 gap-4"
-          >
-            {children}
-          </div>
+          {children}
         </GradientBorderContainer>
       </div>
     </div>

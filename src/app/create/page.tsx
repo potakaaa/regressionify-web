@@ -6,13 +6,16 @@ import Image from "next/image";
 
 const page = () => {
   return (
-    <>
+    <div
+      id="grid-container"
+      className="bg-white rounded-2xl w-full h-full flex flex-col lg:grid lg:grid-cols-2 gap-4"
+    >
       <section
         id="left-section"
         className="flex flex-col items-start justify-between relative p-3 px-2 md:px-6 md:py-5 lg:p-5 lg:px-2 xl:px-5 2xl:px-10 gap-5"
       >
         <div>
-          <BackButton />
+          <BackButton path="/" />
         </div>
         <div
           id="logo-container"
@@ -42,7 +45,7 @@ const page = () => {
       >
         <CreateForm />
       </section>
-    </>
+    </div>
   );
 };
 
